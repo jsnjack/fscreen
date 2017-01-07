@@ -26,11 +26,19 @@ def main(args):
 
 
 def set_gnome_settings(factor):
+    """
+    Sets text-scaling-factor which normally is increasing font size in the most
+    of applications
+    """
     code = call(["gsettings", "set", "org.gnome.desktop.interface", "text-scaling-factor", "%s" % factor])
     print_result("Applying GNOME settings", code)
 
 
 def set_firefox_settings(factor):
+    """
+    Sets devPixelsPerPx property, which scales all elements of the interface and
+    fonts
+    """
     current_user = check_output(["whoami"]).replace("\n", "")
     config_re = re.compile("^/home/%s/\.mozilla/firefox/[\w]*\.default/prefs.js$" % current_user)
     prefs_locations = check_output(["locate", "prefs.js"]).split("\n")
