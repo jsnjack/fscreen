@@ -20,7 +20,11 @@ def main(args):
     """
     print("Applying font scale factor: %s" % args.factor)
 
-    code = call(["gsettings", "set", "org.gnome.desktop.interface", "text-scaling-factor", "%s" % args.factor])
+    set_gnome_settings(args.factor)
+
+
+def set_gnome_settings(factor):
+    code = call(["gsettings", "set", "org.gnome.desktop.interface", "text-scaling-factor", "%s" % factor])
     print_result("Applying GNOME settings", code)
 
 
